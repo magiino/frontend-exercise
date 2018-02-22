@@ -89,12 +89,9 @@ function AddNewTask(){
     httpClient.PostTask(newTask, (success) => {
         if(success != null) {
             addTask(0, [{"id": ID, "text": newTask}]);
+            document.getElementById("newTask").value = "";
         }
     });
-}
-
-function fetch(){
-    httpClient.FetchTasks(FetchTasks);
 }
 
 // Http Client object

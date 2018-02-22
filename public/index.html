@@ -10,18 +10,26 @@
 <body>
     <div class="container">
         <header>
-            <h1>Task Manager</h1>
-            <p> Hello, welcome to Task Manager, here you can manage your daily tasks... </p>
+            <h1 class="title">Task Manager</h1>
+            <p class="subTitle"> Hello, welcome to Task Manager, here you can manage your daily tasks.
+                You can mark your task as Done by click on task, delete with delete button and edit with edit
+                button.
+            </p>
         </header>
         <main>
+            <button type="button" class="editBtn">Edit</button>
             <div id="items">
 
             </div>
             <div class="addDiv">
-                <input id="newTask" name="task" type="text" placeholder="write a task.. ">
+                <input id="newTask"
+                       name="task"
+                       type="text"
+                       placeholder="Write a task.. "
+                       autocomplete="off"
+                       spellcheck="false">
                 <button type="button" class="addBtn" onclick="AddNewTask()">Add Task</button>
             </div>
-            <button type="button" class="addBtn" onclick="fetch()">Fetch Data</button>
         </main>
         <footer>
 

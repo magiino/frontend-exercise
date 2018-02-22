@@ -1,4 +1,24 @@
 /** General **/
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+button:focus {
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+body {
+    background-color: #2d3d4c;
+}
+
 .container {
     max-width: 500px;
     min-width: 500px;
@@ -6,6 +26,17 @@
 }
 
 /** HEADER **/
+.title {
+    text-align: center;
+    margin-bottom: 0;
+    color: #a7b1c2;
+}
+.subTitle {
+    margin-top: 0;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #a7b1c2;
+}
 
 /** MAIN **/
 .item {
@@ -13,7 +44,12 @@
     background-color: #2f4050;
     color: #a7b1c2;
     border-bottom: 1px solid #19aa8d;
+    border-radius: 5px;
     display: flex;
+}
+
+.item:last-child {
+    border-bottom: none;
 }
 
 .task {
@@ -29,6 +65,7 @@
 
 .taskDone {
     border-left: 5px solid #19aa8d;
+    color: white;
 }
 
 .taskText {
@@ -56,6 +93,9 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.btnDel i {
+    pointer-events: none;
+}
 
 .btnDel:hover {
     background-color: #293846;
@@ -70,14 +110,16 @@
     overflow-x: auto;
 }
 
-#newTask, select {
+#newTask {
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0px;
     display: inline-block;
-    border: 1px solid #ccc;
+    background-color: #405160;
+    border: 1px solid #19aa8d;
     border-radius: 5px;
     box-sizing: border-box;
+    color: #a7b1c2;
 }
 
 .addBtn {
@@ -87,6 +129,16 @@
     color: #19aa8d;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.editBtn {
+    background-color: inherit;
+    float: right;
+    display: inline-block;
+    padding: 5px 10px;
+    color: #19aa8d;
+    border: none;
     cursor: pointer;
 }
 
