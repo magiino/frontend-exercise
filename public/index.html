@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Todo App</title>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Todo App</h1>
+    <div class="container">
+        <header>
+            <h1>Task Manager</h1>
+            <p> Hello, welcome to Task Manager, here you can manage your daily tasks... </p>
+        </header>
+        <main>
+            <div id="items">
 
-  TODO: build app
+            </div>
+            <div class="addDiv">
+                <input id="newTask" name="task" type="text" placeholder="write a task.. ">
+                <button type="button" class="addBtn" onclick="AddNewTask()">Add Task</button>
+            </div>
+            <button type="button" class="addBtn" onclick="fetch()">Fetch Data</button>
+        </main>
+        <footer>
+
+        </footer>
+    </div>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

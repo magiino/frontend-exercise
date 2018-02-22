@@ -1,0 +1,84 @@
+/** General **/
+.container {
+    max-width: 500px;
+    min-width: 500px;
+    margin: 0 auto;
+}
+
+/** HEADER **/
+
+/** MAIN **/
+.item {
+    width: 100%;
+    background-color: #2f4050;
+    color: #a7b1c2;
+    border-bottom: 1px solid #1ab394;
+    display: flex;
+}
+
+.task {
+    width: 80%;
+    cursor: pointer;
+    color: white;
+    display: inline-block;
+}
+
+.task:hover{
+    background-color: #293846;
+    color: #ffffff;
+}
+
+.taskDone {
+    border-left: 5px solid #1ab394;
+}
+
+.taskText {
+    margin-left: 20px;
+    display: inline-block;
+    pointer-events: none;
+}
+
+.btnDel {
+    height: inherit;
+    width: 20%;
+    font-size: 30px;
+    color: red;
+    display: inline-block;
+    background-color: #405160;
+    border-style: none;
+    border-left: 1px solid #1ab394;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* Task style */
+
+
+/* Add Task */
+.addDiv {
+    margin-top: 30px;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+#newTask, select {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.addBtn {
+    background-color: #405160;
+    display: inline-block;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/** FOOTER **/
