@@ -11,10 +11,10 @@ window.onload = function () {
 function TaskDone(event) {
     if(!event.srcElement.classList.contains('taskDone')){
         event.srcElement.classList.add('taskDone');
-        document.getElementById('p' + event.srcElement.parentElement.id).style.visibility = 'visible'
+        document.getElementById('p' + event.srcElement.parentElement.id).style.display = 'inline-block';
     } else {
         event.srcElement.classList.remove('taskDone');
-        document.getElementById('p' + event.srcElement.parentElement.id).style.visibility = 'hidden'
+        document.getElementById('p' + event.srcElement.parentElement.id).style.display = 'none';
     }
 }
 
@@ -45,9 +45,8 @@ function addTask(taskId, tasks) {
     // Span
     let span = document.createElement('span');
     span.setAttribute('id', "p"+tasks[taskId].id);
-    span.className = 'taskText';
-    span.style.visibility = 'hidden';
-    span.innerHTML = 'Done';
+    span.className = 'doneText fa fa-check';
+    span.style.display = 'none';
     // Text
     let txt = document.createElement('p');
     txt.className = 'taskText';
@@ -61,8 +60,13 @@ function addTask(taskId, tasks) {
     let btnDel = document.createElement('button');
     btnDel.type = 'button';
     btnDel.className = 'btnDel';
-    btnDel.textContent = 'X';
     btnDel.addEventListener("click", TaskDelete);
+
+    // Btn Icon
+    let btnDelIcon = document.createElement('i');
+    btnDelIcon.className = 'fa fa-trash';
+
+    btnDel.appendChild(btnDelIcon);
 
     // Item div
     let item = document.createElement('div');

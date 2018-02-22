@@ -12,15 +12,14 @@
     width: 100%;
     background-color: #2f4050;
     color: #a7b1c2;
-    border-bottom: 1px solid #1ab394;
+    border-bottom: 1px solid #19aa8d;
     display: flex;
 }
 
 .task {
     width: 80%;
     cursor: pointer;
-    color: white;
-    display: inline-block;
+    display: inline-flex;
 }
 
 .task:hover{
@@ -29,7 +28,7 @@
 }
 
 .taskDone {
-    border-left: 5px solid #1ab394;
+    border-left: 5px solid #19aa8d;
 }
 
 .taskText {
@@ -38,22 +37,31 @@
     pointer-events: none;
 }
 
+.doneText {
+    margin: auto 20px;
+    pointer-events: none;
+    color: #19aa8d;
+    font-size: 20px;
+}
+
 .btnDel {
     height: inherit;
     width: 20%;
     font-size: 30px;
-    color: red;
+    color: #19aa8d;
     display: inline-block;
     background-color: #405160;
     border-style: none;
-    border-left: 1px solid #1ab394;
+    border-left: 1px solid #19aa8d;
     border-radius: 5px;
     cursor: pointer;
 }
 
+.btnDel:hover {
+    background-color: #293846;
+}
 
 /* Task style */
-
 
 /* Add Task */
 .addDiv {
@@ -76,6 +84,7 @@
     background-color: #405160;
     display: inline-block;
     padding: 14px 20px;
+    color: #19aa8d;
     border: none;
     border-radius: 5px;
     cursor: pointer;
