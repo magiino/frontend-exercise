@@ -3,6 +3,10 @@ html {
     box-sizing: border-box;
 }
 
+.fa-save{
+    width: 20px;
+}
+
 *, *:before, *:after {
     box-sizing: inherit;
 }
@@ -42,10 +46,12 @@ body {
 .item {
     width: 100%;
     background-color: #2f4050;
+    height: 50px;
     color: #a7b1c2;
     border-bottom: 1px solid #19aa8d;
     border-radius: 5px;
     display: flex;
+    z-index: 0;
 }
 
 .item:last-child {
@@ -53,7 +59,7 @@ body {
 }
 
 .task {
-    width: 80%;
+    width:90%;
     cursor: pointer;
     display: inline-flex;
 }
@@ -68,37 +74,51 @@ body {
     color: white;
 }
 
-.taskText {
-    margin-left: 20px;
-    display: inline-block;
-    pointer-events: none;
-}
-
 .doneText {
-    margin: auto 20px;
+    margin: auto 0 auto 20px;
     pointer-events: none;
     color: #19aa8d;
     font-size: 20px;
 }
 
-.btnDel {
+.btnTask {
     height: inherit;
-    width: 20%;
-    font-size: 30px;
-    color: #19aa8d;
-    display: inline-block;
+    font-size: 20px;
     background-color: #405160;
+    color: #19aa8d;
+    padding: 10px;
+    display: inline;
     border-style: none;
     border-left: 1px solid #19aa8d;
-    border-radius: 5px;
+    border-bottom: 1px solid #19aa8d;
     cursor: pointer;
 }
-.btnDel i {
+
+.btnTask i {
     pointer-events: none;
 }
 
 .btnDel:hover {
     background-color: #293846;
+}
+
+.inputTask {
+     background-color: inherit;
+     border: none;
+     width: 100%;
+     pointer-events: none;
+     color: #a7b1c2;
+     margin-left: 20px;
+}
+
+.inputTaskEdit {
+    background-color: #405160;
+    color: white;
+    width: 100%;
+    border: 1px solid #19aa8d;
+    border-radius: 5px;
+    padding-left: 10px;
+    pointer-events: auto;
 }
 
 /* Task style */
@@ -129,16 +149,6 @@ body {
     color: #19aa8d;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-}
-
-.editBtn {
-    background-color: inherit;
-    float: right;
-    display: inline-block;
-    padding: 5px 10px;
-    color: #19aa8d;
-    border: none;
     cursor: pointer;
 }
 
