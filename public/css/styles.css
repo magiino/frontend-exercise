@@ -3,24 +3,29 @@ html {
     box-sizing: border-box;
 }
 
-.fa-save{
-    width: 20px;
+body {
+    background-color: #2d3d4c;
+    font-family: sans-serif;
 }
 
 *, *:before, *:after {
     box-sizing: inherit;
 }
 
-button:focus {
+*:focus {
     outline: none;
 }
 
-input:focus {
-    outline: none;
+.fa {
+    width: 20px;
+    pointer-events: none;
 }
 
-body {
-    background-color: #2d3d4c;
+.btn {
+    background-color: #405160;
+    color: #19aa8d;
+    border-style: none;
+    cursor: pointer;
 }
 
 .container {
@@ -32,7 +37,7 @@ body {
 /** HEADER **/
 .title {
     text-align: center;
-    margin-bottom: 0;
+    margin: 50px 0 0 0;
     color: #a7b1c2;
 }
 .subTitle {
@@ -44,23 +49,26 @@ body {
 
 /** MAIN **/
 .item {
-    width: 100%;
     background-color: #2f4050;
     height: 50px;
-    color: #a7b1c2;
     border-bottom: 1px solid #19aa8d;
     border-radius: 5px;
     display: flex;
-    z-index: 0;
 }
 
 .item:last-child {
     border-bottom: none;
 }
 
+.item:last-child > .btnTask {
+    border-bottom: none;
+}
+
 .task {
-    width:90%;
+    width: 100%;
+    color: #a7b1c2;
     cursor: pointer;
+    border-radius: 5px;
     display: inline-flex;
 }
 
@@ -69,12 +77,14 @@ body {
     color: #ffffff;
 }
 
-.taskDone {
+.taskDone{
     border-left: 5px solid #19aa8d;
-    color: white;
+    border-radius: 5px;
+    background-color: #212d38;
+    color: #ffffff;
 }
 
-.doneText {
+.doneSpan {
     margin: auto 0 auto 20px;
     pointer-events: none;
     color: #19aa8d;
@@ -83,73 +93,61 @@ body {
 
 .btnTask {
     height: inherit;
-    font-size: 20px;
-    background-color: #405160;
-    color: #19aa8d;
     padding: 10px;
-    display: inline;
-    border-style: none;
+    font-size: 20px;
     border-left: 1px solid #19aa8d;
     border-bottom: 1px solid #19aa8d;
-    cursor: pointer;
+    display: inline-flex;
 }
 
-.btnTask i {
-    pointer-events: none;
-}
-
-.btnDel:hover {
+.btnTask:hover {
     background-color: #293846;
+}
+
+.btnTaskDisable {
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 .inputTask {
      background-color: inherit;
      border: none;
      width: 100%;
-     pointer-events: none;
      color: #a7b1c2;
      margin-left: 20px;
+     pointer-events: none;
 }
 
 .inputTaskEdit {
     background-color: #405160;
-    color: white;
-    width: 100%;
     border: 1px solid #19aa8d;
+    width: 100%;
+    color: white;
     border-radius: 5px;
     padding-left: 10px;
     pointer-events: auto;
 }
 
-/* Task style */
-
 /* Add Task */
 .addDiv {
     margin-top: 30px;
+    display: flex;
     white-space: nowrap;
-    overflow-x: auto;
 }
 
 #newTask {
-    width: 80%;
+    width: 100%;
     padding: 12px 20px;
-    margin: 8px 0px;
-    display: inline-block;
+    margin-right: 5px;
+    display: inline-flex;
     background-color: #405160;
     border: 1px solid #19aa8d;
     border-radius: 5px;
-    box-sizing: border-box;
     color: #a7b1c2;
 }
 
 .addBtn {
-    background-color: #405160;
-    display: inline-block;
-    padding: 14px 20px;
-    color: #19aa8d;
-    border: none;
+    display: inline-flex;
+    padding: 0 15px;
     border-radius: 5px;
-    cursor: pointer;
 }
-
-/** FOOTER **/

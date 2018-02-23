@@ -9,21 +9,30 @@ window.onload = function () {
     httpClient.FetchTasks(FetchTasks);
 };
 
-function TaskDone(event1) {
-    if(EditMode === 0) {
-        if (!event1.srcElement.classList.contains('taskDone')) {
-            event1.srcElement.classList.add('taskDone');
-            document.getElementById('p' + event1.srcElement.parentElement.id).style.display = 'inline-block';
-        } else {
-            event1.srcElement.classList.remove('taskDone');
-            document.getElementById('p' + event1.srcElement.parentElement.id).style.display = 'none';
-        }
+function TaskDone(event) {
+    if(EditMode === 1)
+        return;
+    let element = event.target;
+    let parentElementId =  element.parentElement.id;
+
+    let spanElement = document.getElementById('p' + parentElementId);
+    let editBtn = document.getElementById('editBtn'+ parentElementId);
+
+    if (!element.classList.contains('taskDone')) {
+        element.classList.add('taskDone');
+        spanElement.style.display = 'inline-block';
+        editBtn.classList.add('btnTaskDisable');
+
+    } else {
+        element.classList.remove('taskDone');
+        spanElement.style.display = 'none';
+        editBtn.classList.remove('btnTaskDisable');
     }
 }
 
-function TaskDelete(event2) {
+function TaskDelete(event) {
     if(EditMode === 0) {
-        httpClient.DeleteTask(event2.srcElement.parentElement.id, (success) => {
+        httpClient.DeleteTask(event.target.parentElement.id, (success) => {
             if (success != null) {
                 document.getElementById(success).remove();
             }
@@ -36,46 +45,46 @@ function FetchTasks(tasks){
     document.getElementById('items').innerHTML = '';
     for (let taskId in tasks) {
         ID = taskId;
-        addTask(taskId,tasks);
+        addTask(tasks[taskId]);
     }
 }
 
 function EditTasks(event){
-    console.log('EDIIT');
-    console.log(event);
-    let element = event.srcElement;
-    let inputTxt = document.getElementById('input'+element.parentElement.id);
+    let element = event.target;
+    let parentID = element.parentElement.id;
+    let inputTxt = document.getElementById('input' + parentID);
 
-    if(EditMode === 0) {
+    if(document.getElementById('task'+parentID).classList.contains('taskDone'))
+        return;
+
+    if (EditMode === 0) {
         EditMode = 1;
-        element.innerHTML = "<i class='fa fa-save'></i>"
+        element.innerHTML = "<i class='fa fa-save'></i>";
         inputTxt.readOnly = false;
         inputTxt.className = 'inputTaskEdit';
     } else {
-        EditMode = 0;
-        element.innerHTML = "<i class='fa fa-edit'></i>"
-        inputTxt.readOnly = true;
-        inputTxt.className = 'inputTask';
-        httpClient.UpdateTask(event.srcElement.parentElement.id, inputTxt.value, (success) => {
-            if(success != null){
-                // TODO
+        httpClient.UpdateTask(parentID, inputTxt.value, (success) => {
+            if (success != null) {
+                EditMode = 0;
+                element.innerHTML = "<i class='fa fa-edit'></i>";
+                inputTxt.readOnly = true;
+                inputTxt.className = 'inputTask';
             }
         })
     }
 }
 
-function addTask(taskId, tasks) {
-    console.log('ADDDDD');
+function addTask(task) {
     // Left side of item
     // Div
-    let task = document.createElement('div');
-    task.className = 'task';
-    task.setAttribute('id', 'task'+tasks[taskId].id);
-    task.addEventListener("click", TaskDone);
+    let taskDiv = document.createElement('div');
+    taskDiv.className = 'task';
+    taskDiv.setAttribute('id', 'task'+ task.id);
+    taskDiv.addEventListener("click", TaskDone);
     // Span
     let span = document.createElement('span');
-    span.setAttribute('id', "p"+tasks[taskId].id);
-    span.className = 'doneText fa fa-check';
+    span.className = 'doneSpan fa fa-check';
+    span.setAttribute('id', "p"+ task.id);
     span.style.display = 'none';
     // Text
     let txt = document.createElement('input');
@@ -83,34 +92,32 @@ function addTask(taskId, tasks) {
     txt.readOnly = true;
     txt.autocomplete = 'off';
     txt.spellcheck = false;
-    txt.setAttribute('id', "input"+tasks[taskId].id);
+    txt.setAttribute('id', "input" + task.id);
     txt.className = 'inputTask';
-    txt.value = tasks[taskId].text;
+    txt.value = task.text;
 
-    task.appendChild(span);
-    task.appendChild(txt);
+    taskDiv.appendChild(span);
+    taskDiv.appendChild(txt);
 
     // Right side of item
-    // Button Del
+    // Button Edit
     let btnEdit = document.createElement('button');
     btnEdit.type = 'button';
-    btnEdit.className = 'btnTask';
-    btnEdit.setAttribute('id', "btn"+tasks[taskId].id);
+    btnEdit.className = 'btn btnTask';
+    btnEdit.setAttribute('id', "editBtn"+ task.id);
     btnEdit.addEventListener("click", EditTasks);
-    // Btn Edit Icon
+    // Button Edit Icon
     let btnEditIcon = document.createElement('i');
     btnEditIcon.className = 'fa fa-edit';
 
-
     btnEdit.appendChild(btnEditIcon);
 
-    // Button Del
+    // Button Delete
     let btnDel = document.createElement('button');
     btnDel.type = 'button';
-    btnDel.className = 'btnTask';
+    btnDel.className = 'btn btnTask';
     btnDel.addEventListener("click", TaskDelete);
-
-    // Btn Del Icon
+    // Button Delete Icon
     let btnDelIcon = document.createElement('i');
     btnDelIcon.className = 'fa fa-trash';
 
@@ -119,9 +126,9 @@ function addTask(taskId, tasks) {
     // Item div
     let item = document.createElement('div');
     item.className = 'item';
-    item.setAttribute('id', tasks[taskId].id);
+    item.setAttribute('id', task.id);
 
-    item.appendChild(task);
+    item.appendChild(taskDiv);
     item.appendChild(btnEdit);
     item.appendChild(btnDel);
 
@@ -129,7 +136,6 @@ function addTask(taskId, tasks) {
 }
 
 function AddNewTask(){
-    console.log('NEEWWW');
     let newTask = document.getElementById("newTask").value;
     if (newTask === ''){
         alert('You can not add empty task!');
@@ -138,8 +144,7 @@ function AddNewTask(){
 
     httpClient.PostTask(newTask, (success) => {
         if(success != null) {
-            console.log(ID);
-            addTask(0, [{"id": ID, "text": newTask}]);
+            addTask({"id": ID, "text": newTask});
             document.getElementById("newTask").value = "";
         }
     });
@@ -165,22 +170,19 @@ function HttpClient() {
     this.UpdateTask = function(id, task, callback){
         httpRequest.open("PUT", "http://localhost:3000/api/tasks/" + id, true);
         httpRequest.setRequestHeader('Content-Type', 'application/json');
-
         httpRequest.onreadystatechange = function () {
             if (httpRequest.status === 204 && httpRequest.readyState === 4) {
                 callback(id);
             } else if (httpRequest.status > 400 && httpRequest.readyState === 4) {
-                console.log('Delete Data Failed with Status Code - ' + httpRequest.status);
+                console.log('Update Data Failed with Status Code - ' + httpRequest.status);
                 callback(null);
             }
         };
-
         httpRequest.send(JSON.stringify({"id":id, "text":task}));
     };
 
     this.DeleteTask = function(id, callback){
         httpRequest.open("DELETE", "http://localhost:3000/api/tasks/" + id, true);
-
         httpRequest.onreadystatechange = function () {
             if (httpRequest.status === 204 && httpRequest.readyState === 4) {
                 callback(id);
@@ -189,19 +191,17 @@ function HttpClient() {
                 callback(null);
             }
         };
-
         httpRequest.send(null);
     };
 
     this.PostTask = function(task, callback){
         httpRequest.open("POST", "http://localhost:3000/api/tasks", true);
         httpRequest.setRequestHeader('Content-Type', 'application/json');
-
         httpRequest.onreadystatechange = function () {
             if (httpRequest.status === 204 && httpRequest.readyState === 4) {
                 callback(ID);
             } else if (httpRequest.status > 400 && httpRequest.readyState === 4) {
-                console.log('Delete Data Failed with Status Code - ' + httpRequest.status);
+                console.log('Post Data Failed with Status Code - ' + httpRequest.status);
                 callback(null);
             }
         };
